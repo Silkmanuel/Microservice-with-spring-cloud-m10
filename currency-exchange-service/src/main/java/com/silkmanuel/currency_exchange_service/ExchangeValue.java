@@ -2,22 +2,32 @@ package com.silkmanuel.currency_exchange_service;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 /**
  * ExchangeValue
  */
+@Entity
 public class ExchangeValue {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "currency_from")
     private String from;
+    @Column(name = "currency_to")
     private String to;
     private BigDecimal conversionMultiple;
-    private int port;
+    private Integer port;
     
-    public ExchangeValue(Long id, String from, String to, BigDecimal conversionMultiple, int port) {
+    public ExchangeValue(Long id, String from, String to, BigDecimal conversionMultiple) {
         this.id = id;
         this.from = from;
         this.to = to;
         this.conversionMultiple = conversionMultiple;
-        this.port = port;
     }
 
     public ExchangeValue() {
@@ -57,11 +67,11 @@ public class ExchangeValue {
         this.conversionMultiple = conversionMultiple;
     }
 
-    public int getPort() {
+    public Integer getPort() {
         return port;
     }
 
-    public void setPort(int port) {
+    public void setPort(Integer port) {
         this.port = port;
     }
 }

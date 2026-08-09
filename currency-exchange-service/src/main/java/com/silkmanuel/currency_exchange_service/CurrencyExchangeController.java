@@ -15,12 +15,13 @@ public class CurrencyExchangeController {
 
     @GetMapping("/currency-exchange/from/{from}/to/{to}")
     public ExchangeValue retrieveExchangeValue(@PathVariable String from, @PathVariable String to) {
-        return new ExchangeValue(
+        ExchangeValue exchangeValue = new ExchangeValue(
             1000L, 
             from, 
             to, 
-            BigDecimal.valueOf(65), 
-            Integer.parseInt(environment.getProperty("local.server.port"))
+            BigDecimal.valueOf(65)
         );
+        exchangeValue.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
+        return exchangeValue;
     }
 }
