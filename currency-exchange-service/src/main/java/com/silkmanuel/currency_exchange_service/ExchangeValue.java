@@ -10,16 +10,20 @@ public class ExchangeValue {
     private String from;
     private String to;
     private BigDecimal conversionMultiple;
+    private int port;
     
+    public ExchangeValue(Long id, String from, String to, BigDecimal conversionMultiple, int port) {
+        this.id = id;
+        this.from = from;
+        this.to = to;
+        this.conversionMultiple = conversionMultiple;
+        this.port = port;
+    }
+
     public ExchangeValue() {
     }
 
-    public ExchangeValue(Long id, String from, String to, BigDecimal conversionMultiple) {
-        this.from = from;
-        this.to = to;
-        this.id = id;
-        this.conversionMultiple = conversionMultiple;
-    }
+
 
     public Long getId() {
         return id;
@@ -51,5 +55,13 @@ public class ExchangeValue {
 
     public void setConversionMultiple(BigDecimal conversionMultiple) {
         this.conversionMultiple = conversionMultiple;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 }
