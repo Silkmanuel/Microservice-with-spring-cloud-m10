@@ -16,10 +16,9 @@ import org.springframework.http.ResponseEntity;
 public class CurrencyConversionController {
     @Autowired
     private Environment environment;
+    @Autowired
+    private CurrencyExchangeServiceProxy proxy;
 
-    public CurrencyConversionController(Environment environment) {
-        this.environment = environment;
-    }
 
     @GetMapping("/currency-converter/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversationBean convertCurrency(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity) {
@@ -41,6 +40,21 @@ public class CurrencyConversionController {
             quantity.multiply(response.getConversionMultiple())
         );
         currencyConversationBean.setPort(response.getPort());
+        return currencyConversationBean;
+    }
+
+    @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
+    public CurrencyConversationBean convertCurrencyFeign(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity) {
+        CurrencyConversationBean responseEntity = proxy.retrieveExchangeValue(from, to);
+        CurrencyConversationBean currencyConversationBean = new CurrencyConversationBean(
+            responseEntity.getId(),
+            from,
+            to,
+            responseEntity.getConversionMultiple(),
+            quantity,
+            quantity.multiply(responseEntity.getConversionMultiple())
+        );
+        currencyConversationBean.setPort(responseEntity.getPort());
         return currencyConversationBean;
     }
 }
