@@ -58,3 +58,19 @@ LIMITS SERVICE > (RABBIT MQ)
               └──────────────┐
                              │
                       consulta Naming
+======
+
+                  Eureka
+                    │
+             "Onde está o
+          currency-exchange?"
+                    │
+          ┌─────────┼─────────┐
+          ↓         ↓         ↓
+        8000      8001      8002
+          └─────────┼─────────┘
+                    ↑
+             Load Balancer
+                    ↑
+                    │
+       currency-conversion
