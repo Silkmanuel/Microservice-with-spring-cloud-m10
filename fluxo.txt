@@ -1,0 +1,20 @@
+O fluxo atual:
+Cliente
+   │
+   ▼
+API Gateway :8765
+   │
+   ▼
+Currency Conversion :8100 (realiza a conversão)
+   │
+   │ Feign
+   │
+   ▼
+Eureka
+   │
+   │ encontra instâncias
+   ▼
+Currency Exchange (contém a taxa de câmbio)
+   ├── :8000
+   ├── :8001
+   └── :8002

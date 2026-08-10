@@ -20,28 +20,28 @@ public class CurrencyConversionController {
     private CurrencyExchangeServiceProxy proxy;
 
 
-    @GetMapping("/currency-converter/from/{from}/to/{to}/quantity/{quantity}")
-    public CurrencyConversationBean convertCurrency(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity) {
-        Map<String, String> uriVariables = new HashMap<>();
-        uriVariables.put("from", from);
-        uriVariables.put("to", to);
-        ResponseEntity<CurrencyConversationBean> responseEntity = new RestTemplate().getForEntity(
-            "http://localhost:8000/currency-exchange/from/{from}/to/{to}", 
-            CurrencyConversationBean.class, 
-            uriVariables
-        );
-        CurrencyConversationBean response = responseEntity.getBody();
-        CurrencyConversationBean currencyConversationBean = new CurrencyConversationBean(
-            response.getId(),
-            from,
-            to,
-            response.getConversionMultiple(),
-            quantity,
-            quantity.multiply(response.getConversionMultiple())
-        );
-        currencyConversationBean.setPort(response.getPort());
-        return currencyConversationBean;
-    }
+    // @GetMapping("/currency-converter/from/{from}/to/{to}/quantity/{quantity}")
+    // public CurrencyConversationBean convertCurrency(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity) {
+    //     Map<String, String> uriVariables = new HashMap<>();
+    //     uriVariables.put("from", from);
+    //     uriVariables.put("to", to);
+    //     ResponseEntity<CurrencyConversationBean> responseEntity = new RestTemplate().getForEntity(
+    //         "http://localhost:8000/currency-exchange/from/{from}/to/{to}", 
+    //         CurrencyConversationBean.class, 
+    //         uriVariables
+    //     );
+    //     CurrencyConversationBean response = responseEntity.getBody();
+    //     CurrencyConversationBean currencyConversationBean = new CurrencyConversationBean(
+    //         response.getId(),
+    //         from,
+    //         to,
+    //         response.getConversionMultiple(),
+    //         quantity,
+    //         quantity.multiply(response.getConversionMultiple())
+    //     );
+    //     currencyConversationBean.setPort(response.getPort());
+    //     return currencyConversationBean;
+    // }
 
     @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversationBean convertCurrencyFeign(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity) {

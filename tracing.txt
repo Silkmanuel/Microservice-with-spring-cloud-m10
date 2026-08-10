@@ -1,0 +1,33 @@
+== TRACE E SPAN
+1. A ideia principal
+Uma requisição recebe um identificador que acompanha toda a sua jornada.
+
+== Trace
+abc123
+│
+├── Gateway
+├── Conversion
+└── Exchange
+
+== Span
+Trace: abc123
+
+Gateway
+└── Span: gateway request
+
+Conversion
+└── Span: conversion request
+
+Exchange
+└── Span: exchange request
+
+== Visualmente
+TRACE abc123
+│
+├──── Gateway ────────────────┐
+│                             │
+│      ├── Conversion ────────┤
+│      │                      │
+│      │      └── Exchange ───┤
+│                             │
+└─────────────────────────────┘

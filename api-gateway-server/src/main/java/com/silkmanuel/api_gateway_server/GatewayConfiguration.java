@@ -28,4 +28,19 @@ public class GatewayConfiguration {
                 .filter(loggingFilter)
                 .build();
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> currencyConversionRoute(
+            HandlerFilterFunction<ServerResponse, ServerResponse> loggingFilter) {
+
+        return GatewayRouterFunctions.route("currency-conversion")
+                .route(
+                    request -> request.path()
+                        .startsWith("/currency-converter/"),
+                    HandlerFunctions.http()
+                )
+                .filter(lb("currency-conversion-service"))
+                .filter(loggingFilter)
+                .build();
+    }
 }
