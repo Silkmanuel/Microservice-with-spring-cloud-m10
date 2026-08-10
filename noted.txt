@@ -74,3 +74,6 @@ LIMITS SERVICE > (RABBIT MQ)
                     ↑
                     │
        currency-conversion
+
+== CRIANDO AS INSTANCIAS DE EXCHANGE SERVICE
+mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=800x"
