@@ -26,3 +26,35 @@ LIMITS SERVICE > (RABBIT MQ)
 (RABBIT MQ) > (ZIPKIN DISTRIBUTED TRACING SERVER)
 (ZIPKIN DISTRIBUTED TRACING SERVER) > (DATABASE)
 
+==== SEM NAMING SERVER
+             ┌──────────────────────┐
+             │ Currency Conversion   │
+             │       :8100           │
+             └──────────┬───────────┘
+                        │
+                  Load Balancer
+                        │
+             ┌──────────┼──────────┐
+             ↓          ↓          ↓
+           :8000      :8001      :8002
+             │          │          │
+             └──────────┴──────────┘
+
+==== COM NAMING SERVER
+                  ┌─────────────────┐
+                  │  Naming Server  │
+                  │     :8761       │
+                  └────────▲────────┘
+                           │
+                    registra serviços
+                           │
+              ┌────────────┴────────────┐
+              │                         │
+              │                         │
+       Currency Exchange         Currency Conversion
+          :8000/:8001/:8002           :8100
+              │
+              │
+              └──────────────┐
+                             │
+                      consulta Naming
