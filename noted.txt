@@ -77,3 +77,16 @@ LIMITS SERVICE > (RABBIT MQ)
 
 == CRIANDO AS INSTANCIAS DE EXCHANGE SERVICE
 mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=800x"
+
+=== RUNING
+1º CONFIG SERVER
+2º NAMING SERVER
+3º EXCHANGE SERVICE
+4º CONVERSION SERVICE
+
+=== COM GATEWAY
+                         ┌─── :8000
+                         │
+Client → Gateway → Eureka├─── :8001
+                         │
+                         └─── :8002
