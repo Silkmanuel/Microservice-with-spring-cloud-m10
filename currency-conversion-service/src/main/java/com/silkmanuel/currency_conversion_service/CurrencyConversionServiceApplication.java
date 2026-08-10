@@ -17,7 +17,6 @@ public class CurrencyConversionServiceApplication {
                         CurrencyConversionServiceApplication.class,
                         args
                 );
-
         Environment environment =
                 context.getBean(Environment.class);
 
