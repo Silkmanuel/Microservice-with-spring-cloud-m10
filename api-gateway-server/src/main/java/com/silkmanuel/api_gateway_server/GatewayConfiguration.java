@@ -9,15 +9,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.function.HandlerFilterFunction;
 import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.ServerResponse;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import io.opentelemetry.api.trace.Span;
 
 @Configuration
 public class GatewayConfiguration {
-
+    private static final Logger log = LoggerFactory.getLogger(GatewayConfiguration.class);
     @Bean
     public RouterFunction<ServerResponse> currencyExchangeRoute(
             HandlerFilterFunction<ServerResponse, ServerResponse> loggingFilter) {
-
+        log.info("Trace atual: {}", Span.current().getSpanContext().getTraceId());
         return GatewayRouterFunctions.route("currency-exchange")
                 .route(
                     request -> request.path()
@@ -32,7 +34,7 @@ public class GatewayConfiguration {
     @Bean
     public RouterFunction<ServerResponse> currencyConversionRoute(
             HandlerFilterFunction<ServerResponse, ServerResponse> loggingFilter) {
-
+        log.info("Trace atual: {}", Span.current().getSpanContext().getTraceId());
         return GatewayRouterFunctions.route("currency-conversion")
                 .route(
                     request -> request.path()

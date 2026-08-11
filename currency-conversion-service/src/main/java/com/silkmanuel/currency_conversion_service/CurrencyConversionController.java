@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import io.opentelemetry.api.trace.Span;
 
 @RestController
 public class CurrencyConversionController {
@@ -18,6 +22,7 @@ public class CurrencyConversionController {
     private Environment environment;
     @Autowired
     private CurrencyExchangeServiceProxy proxy;
+    private static final Logger log = LoggerFactory.getLogger(CurrencyConversionController.class);
 
 
     // @GetMapping("/currency-converter/from/{from}/to/{to}/quantity/{quantity}")
@@ -45,6 +50,7 @@ public class CurrencyConversionController {
 
     @GetMapping("/currency-converter/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversationBean convertCurrencyFeign(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity) {
+        log.info("Trace atual: {}", Span.current().getSpanContext().getTraceId());
         CurrencyConversationBean responseEntity = proxy.retrieveExchangeValue(from, to);
         CurrencyConversationBean currencyConversationBean = new CurrencyConversationBean(
             responseEntity.getId(),
