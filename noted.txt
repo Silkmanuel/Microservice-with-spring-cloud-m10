@@ -90,3 +90,4 @@ mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=800x"
 Client → Gateway → Eureka├─── :8001
                          │
                          └─── :8002
+## http://localhost:8765/currency-exchange/from/USD/to/INR

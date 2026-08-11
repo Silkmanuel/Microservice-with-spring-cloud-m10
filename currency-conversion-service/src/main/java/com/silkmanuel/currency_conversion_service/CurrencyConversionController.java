@@ -43,7 +43,7 @@ public class CurrencyConversionController {
     //     return currencyConversationBean;
     // }
 
-    @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
+    @GetMapping("/currency-converter/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversationBean convertCurrencyFeign(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity) {
         CurrencyConversationBean responseEntity = proxy.retrieveExchangeValue(from, to);
         CurrencyConversationBean currencyConversationBean = new CurrencyConversationBean(
