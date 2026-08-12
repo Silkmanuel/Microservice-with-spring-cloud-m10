@@ -18,3 +18,40 @@ Currency Exchange (contém a taxa de câmbio)
    ├── :8000
    ├── :8001
    └── :8002
+
+   // 
+                    Git
+                     │
+                     ▼
+             Config Server :8888
+                     │
+                     ▼
+              Spring Cloud Bus
+                     │
+                     ▼
+                 RabbitMQ
+                     │
+          ┌──────────┼───────────┐
+          ▼          ▼           ▼
+     Exchange     Conversion   Gateway
+       :8000        :8100       :8765
+===============
+
+        Git Config Repository
+                 │
+                 ▼
+          Config Server
+              :8888
+                 │
+          /actuator/busrefresh
+                 │
+                 ▼
+             RabbitMQ
+                 │
+       ┌─────────┼─────────┐
+       ▼         ▼         ▼
+    Limits    Currency   Gateway
+    Service    Service    Service
+       │         │         │
+       ▼         ▼         ▼
+    refresh    refresh    refresh
