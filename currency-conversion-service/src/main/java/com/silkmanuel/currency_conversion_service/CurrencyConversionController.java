@@ -58,7 +58,8 @@ public class CurrencyConversionController {
             to,
             responseEntity.getConversionMultiple(),
             quantity,
-            quantity.multiply(responseEntity.getConversionMultiple())
+            quantity.multiply(responseEntity.getConversionMultiple()),
+            responseEntity.getMessage()
         );
         currencyConversationBean.setPort(responseEntity.getPort());
         return currencyConversationBean;

@@ -10,16 +10,18 @@ public class CurrencyConversationBean {
     private BigDecimal quantity;
     private BigDecimal totalCalculatedAmount;
     private Integer port;
+    private String message;
     public CurrencyConversationBean() {
     }
     public CurrencyConversationBean(Long id, String from, String to, BigDecimal conversionMultiple, BigDecimal quantity,
-            BigDecimal totalCalculatedAmount) {
+            BigDecimal totalCalculatedAmount, String message) {
         this.id = id;
         this.from = from;
         this.to = to;
         this.conversionMultiple = conversionMultiple;
         this.quantity = quantity;
         this.totalCalculatedAmount = totalCalculatedAmount;
+        this.message = message;
     }
     public Long getId() {
         return id;
@@ -62,6 +64,12 @@ public class CurrencyConversationBean {
     }
     public void setPort(Integer port) {
         this.port = port;
+    }
+    public String getMessage() {
+        return message;
+    }
+    public void setMessage(String message) {
+        this.message = message;
     }
 
 }
